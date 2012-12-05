@@ -1,0 +1,5 @@
+#####
+启动monogdb  shell
+#!/bin/bash
+echo "star-mongdb"
+./mongod --dbpath=/local/mongdb/data/mdata --logpath=local/mongdb/data/log/log.txt
