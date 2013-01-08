@@ -1,0 +1,95 @@
+start monogdb
+mongod 加参数
+创建数据库 方法 user xxx
+操作 
+db(查看当前数据库名)
+show dbs
+
+
+nginx monogdb gridfs
+1 安装git下载  https://github.com/mdirolf/nginx-gridfs.git
+http://www.lifeba.org/arch/mongodb_nginx_gridfs.html
+
+http://ftp.sleepgate.ru/pub/FreeBSD/distfiles/（很多下载）
+http://blog.csdn.net/hengyunabc/article/details/7294099
+
+--教程
+http://blog.csdn.net/hengyunabc/article/details/7294099
+http://blog.csdn.net/hengyunabc/article/details/7294099
+
+
+nginx-gridfs模块的安装使用
+
+项目地址：https://github.com/mdirolf/nginx-gridfs
+
+通过nginx-gridfs，可以直接用http来访问GridFS中的文件。
+
+1. 安装
+
+安装各种依赖包：zlib，pcre，openssl
+
+在ubuntu下可能是以下命令：
+
+sudo apt-get install zlib1g-dev            //貌似sudo apt-get install zlib-dev 不能安装
+
+sudo apt-get install libpcre3 libpcre3-dev
+
+sudo apt-get install openssl libssl-dev
+
+安装git（略）
+
+用git下载nginx-gridfs的代码：
+
+git clone git://github.com/mdirolf/nginx-gridfs.git
+
+    cd nginx-gridfs
+
+    git submodule init
+
+    git submodule update
+
+下载nginx：
+
+wget http://nginx.org/download/nginx-1.0.12.zip
+
+tar zxvf nginx-1.0.12.zip
+
+cd nginx-1.0.12
+
+ ./configure --add-module=<nginx-gridfs的路径>
+
+make
+
+sudo make install
+
+如果编译出错，则在configure时加上--with-cc-opt=-Wno-error 参数。
+
+2. 配置nginx
+
+在server的配置中加上以下
+
+   location /pics/ {
+
+                gridfs pics
+
+                field=filename
+
+                type=string;
+
+                mongo 127.0.0.1:27017;
+
+        }
+
+上面的配置表示：
+
+数据库是pics，通过文件名filename来访问文件，filename的类型是string
+
+目前只支持通过id和filename来访问文件。
+
+启动nginx：/usr/local/nginx/sbin/nginx
+
+用MongoVUE把一个图片001.jpg上传到pics数据库中。
+
+打开：http://localhost/pics/001.jpg
+
+如果成功，则可以看到显示图片了。
