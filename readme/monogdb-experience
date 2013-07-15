@@ -8,4 +8,6 @@
 1 use admin
   db.shutdownServer()
 2 kill -2 or kill -15  (不要使用kill -9)  
-  
+ctrl+c是终止当前在终端窗口中运行的命令或脚本，
+kill -9 pid，是不顾后果的强制终止(如果的你的速度够快，有时候是和ctrl＋c是一样的)
+kill -15 pid，是先关闭和其有关的程序，再将其关闭
