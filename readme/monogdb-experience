@@ -1,0 +1,11 @@
+1child process failed, exited with error number 100
+没正常关闭造成！
+解决办法 
+1启动运行--repair 例如 ./mongod -f db.conf --repair
+2repair后再次启动mongod ./mongod -f db.conf
+---
+正确关闭monogdb的方法
+1 use admin
+  db.shutdownServer()
+2 kill -2 or kill -15  (不要使用kill -9)  
+  
